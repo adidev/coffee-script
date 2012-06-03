@@ -105,6 +105,10 @@ exports.Base = class Base
     return list[i] while i-- when list[i] not instanceof Comment
     null
 
+  contextWalk: (name = @constructor.name) ->
+    console.log "#{name} in context walk"
+    @eachChild (node) ->  node.contextWalk()
+
   # `toString` representation of the node, for inspecting the parse tree.
   # This is what `coffee --nodes` prints out.
   toString: (idt = '', name = @constructor.name) ->

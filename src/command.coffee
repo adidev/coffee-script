@@ -123,6 +123,8 @@ compileScript = (file, input, base) ->
   try
     t = task = {file, input, options}
     CoffeeScript.emit 'compile', task
+    printLine "Calling context walk"
+    CoffeeScript.nodes(t.input).contextWalk()
     if      o.tokens      then printTokens CoffeeScript.tokens t.input
     else if o.nodes       then printLine CoffeeScript.nodes(t.input).toString().trim()
     else if o.run         then CoffeeScript.run t.input, t.options
